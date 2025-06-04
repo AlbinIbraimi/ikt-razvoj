@@ -1,0 +1,47 @@
+# Ignore build outputs and user-specific files inside myproject
+/myproject/bin/
+/myproject/obj/
+/myproject/.vs/
+/myproject/*.user
+/myproject/*.suo
+/myproject/*.userosscache
+/myproject/*.sln.docstates
+
+# Ignore Rider project files
+/myproject/.idea/
+
+# Ignore ASP.NET secrets
+/myproject/appsettings.*.json
+
+# Ignore logs
+/myproject/logs/
+/myproject/*.log
+
+# Ignore local database files
+/myproject/*.mdf
+/myproject/*.ldf
+/myproject/*.db
+
+# Ignore publish folder if used
+/myproject/publish/
+/myproject/wwwroot/lib/
+
+# Ignore npm packages if frontend assets are used
+/myproject/node_modules/
+/myproject/package-lock.json
+
+# Ignore Visual Studio Code workspace settings
+/myproject/.vscode/
+
+# Optional: ignore dotnet tools if not version-controlled
+/.dotnet_tool/
+
+# Optional: ignore environment-specific config
+/myproject/.env
+/myproject/.env.*
+
+# Ignore compiled Razor files (if any)
+/myproject/obj/**/*.cshtml.cs
+
+# Ignore test result files
+/myproject/TestResults/
