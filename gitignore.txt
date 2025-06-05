@@ -1,47 +1,37 @@
-# Ignore build outputs and user-specific files inside myproject
-/myproject/bin/
-/myproject/obj/
-/myproject/.vs/
-/myproject/*.user
-/myproject/*.suo
-/myproject/*.userosscache
-/myproject/*.sln.docstates
+# Node (React frontend)
+agrostore_frontend/node_modules/
+agrostore_frontend/.env
+agrostore_frontend/.DS_Store
+agrostore_frontend/dist/
+agrostore_frontend/build/
+agrostore_frontend/.vite/
 
-# Ignore Rider project files
-/myproject/.idea/
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
 
-# Ignore ASP.NET secrets
-/myproject/appsettings.*.json
+# OS files
+.DS_Store
+Thumbs.db
 
-# Ignore logs
-/myproject/logs/
-/myproject/*.log
+# IDE files
+.vscode/
+.idea/
 
-# Ignore local database files
-/myproject/*.mdf
-/myproject/*.ldf
-/myproject/*.db
+# .NET (backend)
+agrostore_backend/bin/
+agrostore_backend/obj/
+agrostore_backend/.vs/
+agrostore_backend/.vscode/
+agrostore_backend/*.user
+agrostore_backend/*.suo
 
-# Ignore publish folder if used
-/myproject/publish/
-/myproject/wwwroot/lib/
+# ASP.NET Secrets
+agrostore_backend/appsettings.Development.json
+agrostore_backend/appsettings.Local.json
+agrostore_backend/Properties/launchSettings.json
 
-# Ignore npm packages if frontend assets are used
-/myproject/node_modules/
-/myproject/package-lock.json
-
-# Ignore Visual Studio Code workspace settings
-/myproject/.vscode/
-
-# Optional: ignore dotnet tools if not version-controlled
-/.dotnet_tool/
-
-# Optional: ignore environment-specific config
-/myproject/.env
-/myproject/.env.*
-
-# Ignore compiled Razor files (if any)
-/myproject/obj/**/*.cshtml.cs
-
-# Ignore test result files
-/myproject/TestResults/
+# Rider
+*.sln.iml
