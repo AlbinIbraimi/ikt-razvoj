@@ -1,0 +1,15 @@
+# Node (React frontend)
+agrostore_frontend/node_modules/
+agrostore_frontend/.env
+agrostore_frontend/.DS_Store
+agrostore_frontend/dist/
+agrostore_frontend/build/
+agrostore_frontend/.vite/
+
+# .NET (backend)
+agrostore_backend/bin/
+agrostore_backend/obj/
+agrostore_backend/.vs/
+agrostore_backend/.vscode/
+agrostore_backend/*.user
+agrostore_backend/*.suo
