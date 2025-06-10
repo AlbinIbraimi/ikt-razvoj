@@ -1,6 +1,0 @@
-@agrostore_backend_HostAddress = http://localhost:5047
-
-GET {{agrostore_backend_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
