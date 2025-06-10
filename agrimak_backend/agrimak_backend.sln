@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agrimak_backend", "agrimak_backend.csproj", "{633BD73C-DAEB-4FF3-9967-C6222698CBCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agrimak_domain", "..\agrimak.domain\agrimak_domain.csproj", "{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{633BD73C-DAEB-4FF3-9967-C6222698CBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{633BD73C-DAEB-4FF3-9967-C6222698CBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{633BD73C-DAEB-4FF3-9967-C6222698CBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

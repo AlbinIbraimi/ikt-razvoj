@@ -29,3 +29,9 @@ agrimak_backend/.vs/
 agrimak_backend/.vscode/
 agrimak_backend/*.user
 agrimak_backend/*.suo
+agrimak.domain/bin/
+agrimak.domain/obj/
+agrimak.domain/.vs/
+agrimak.domain/.vscode/
+agrimak.domain/*.user
+agrimak.domain/*.suo
