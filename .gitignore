@@ -1,10 +1,26 @@
 # Node (React frontend)
-agrostore_frontend/node_modules/
-agrostore_frontend/.env
-agrostore_frontend/.DS_Store
-agrostore_frontend/dist/
-agrostore_frontend/build/
-agrostore_frontend/.vite/
+agrimak_frontend/logs
+agrimak_frontend/*.log
+agrimak_frontend/npm-debug.log*
+agrimak_frontend/yarn-debug.log*
+agrimak_frontend/yarn-error.log*
+agrimak_frontend/pnpm-debug.log*
+agrimak_frontend/lerna-debug.log*
+agrimak_frontend/node_modules
+agrimak_frontend/dist
+agrimak_frontend/dist-ssr
+agrimak_frontend/*.local
+agrimak_frontend/.vscode/*
+agrimak_frontend/!.vscode/extensions.json
+agrimak_frontend/.idea
+agrimak_frontend/.DS_Store
+agrimak_frontend/*.suo
+agrimak_frontend/*.ntvs*
+agrimak_frontend/*.njsproj
+agrimak_frontend/*.sln
+agrimak_frontend/*.sw?
+agrimak_frontend/.env
+
 
 # .NET (backend)
 agrostore_backend/bin/
