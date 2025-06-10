@@ -23,9 +23,9 @@ agrimak_frontend/.env
 
 
 # .NET (backend)
-agrostore_backend/bin/
-agrostore_backend/obj/
-agrostore_backend/.vs/
-agrostore_backend/.vscode/
-agrostore_backend/*.user
-agrostore_backend/*.suo
+agrimak_backend/bin/
+agrimak_backend/obj/
+agrimak_backend/.vs/
+agrimak_backend/.vscode/
+agrimak_backend/*.user
+agrimak_backend/*.suo
