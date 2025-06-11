@@ -12,8 +12,8 @@ using agrimak.backend.Data;
 namespace agrimak_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250610152435_addIdentityContext")]
-    partial class addIdentityContext
+    [Migration("20250611102006_addUnitToProduct")]
+    partial class addUnitToProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,6 +244,10 @@ namespace agrimak_backend.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("text");
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace agrimak_backend.Controllers
+namespace agrimak.backend.Controllers
 {
     [Route("home")]
     [ApiController]
@@ -8,7 +8,7 @@ namespace agrimak_backend.Controllers
     {
         [HttpGet]
         [Route("test")]
-        public  JsonResult TestEndpoint()
+        public JsonResult TestEndpoint()
         {
             return new JsonResult("test");
         }

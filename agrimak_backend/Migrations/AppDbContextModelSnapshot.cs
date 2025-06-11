@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using agrimak_backend.Data;
+using agrimak.backend.Data;
 
 #nullable disable
 
@@ -241,6 +241,10 @@ namespace agrimak_backend.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("text");
 

@@ -1,4 +1,4 @@
-﻿namespace agrimak_domain
+﻿namespace agrimak.domain
 {
     public class Product
     {
@@ -8,5 +8,6 @@
         public byte[] Image { get; set; }
         public double Price { get; set; }
         public Category Category { get; set; }
+        public string Unit { get; set; }
     }
 }
