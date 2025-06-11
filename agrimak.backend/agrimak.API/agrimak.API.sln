@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agrimak.backend", "agrimak.backend.csproj", "{633BD73C-DAEB-4FF3-9967-C6222698CBCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agrimak.API", "agrimak.API.csproj", "{633BD73C-DAEB-4FF3-9967-C6222698CBCC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agrimak.domain", "..\agrimak.domain\agrimak.domain.csproj", "{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agrimak.Domain", "..\agrimak.domain\agrimak.Domain.csproj", "{AFFAA841-7AEC-4077-ACFE-D2CC7A5DCB27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -23,15 +23,15 @@ agrimak.frontend/.env
 
 
 # .NET (backend)
-agrimak.backend/bin/
-agrimak.backend/obj/
-agrimak.backend/.vs/
-agrimak.backend/.vscode/
-agrimak.backend/*.user
-agrimak.backend/*.suo
-agrimak.domain/bin/
-agrimak.domain/obj/
-agrimak.domain/.vs/
-agrimak.domain/.vscode/
-agrimak.domain/*.user
-agrimak.domain/*.suo
+agrimak.backend/agrimak.API/bin/
+agrimak.backend/agrimak.API/obj/
+agrimak.backend/agrimak.API/.vs/
+agrimak.backend/agrimak.API/.vscode/
+agrimak.backend/agrimak.API/*.user
+agrimak.backend/agrimak.API/*.suo
+agrimak.backend/agrimak.Domain/bin/
+agrimak.backend/agrimak.Domain/obj/
+agrimak.backend/agrimak.Domain/.vs/
+agrimak.backend/agrimak.Domain/.vscode/
+agrimak.backend/agrimak.Domain/*.user
+agrimak.backend/agrimak.Domain/*.suo

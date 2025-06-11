@@ -7,10 +7,17 @@ namespace agrimak.backend.Controllers
     public class HomeController : ControllerBase
     {
         [HttpGet]
-        [Route("test")]
-        public JsonResult TestEndpoint()
+        [Route("getAll")]
+        public JsonResult GetAllProducts()
         {
             return new JsonResult("test");
+        }
+
+        [HttpGet]
+        [Route("getByCategory")]
+        public JsonResult GetByType() 
+        {
+            return new JsonResult("getbytype");
         }
     }
 }

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\agrimak.domain\agrimak.domain.csproj" />
+    <ProjectReference Include="..\agrimak.domain\agrimak.Domain.csproj" />
   </ItemGroup>
 
 </Project>
