@@ -1,4 +1,4 @@
-using agrimak.backend.Data;
+using agrimak.API.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

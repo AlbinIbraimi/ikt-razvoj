@@ -1,12 +1,12 @@
-﻿using agrimak.backend.Data;
-using agrimak.backend.DTOs;
+﻿using agrimak.API.Data;
+using agrimak.API.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace agrimak.backend.Controllers
+namespace agrimak.API.Controllers
 {
     [Route("account")]
     [ApiController]

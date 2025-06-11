@@ -1,4 +1,4 @@
-﻿namespace agrimak.backend.DTOs
+﻿namespace agrimak.API.DTOs
 {
     public class UserDto
     {

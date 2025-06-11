@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace agrimak.backend.Controllers
+namespace agrimak.API.Controllers
 {
     [Route("home")]
     [ApiController]
@@ -15,7 +15,7 @@ namespace agrimak.backend.Controllers
 
         [HttpGet]
         [Route("getByCategory")]
-        public JsonResult GetByType() 
+        public JsonResult GetByType()
         {
             return new JsonResult("getbytype");
         }
