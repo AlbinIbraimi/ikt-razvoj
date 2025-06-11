@@ -1,11 +1,21 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Truck, Shield, Users } from 'lucide-react';
-import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
+import { useEffect, useState } from 'react';
+import { AppStore } from '../utils/store';
+import { products } from '../data/products';
 
 export default function Home() {
-  const featuredProducts = products.filter(product => product.featured);
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    setData(products);
+    // AppStore.getProducts().then(response => {
+    //   setData([]);
+    // }).catch(() => {
+    //   setData([]);
+    // });
+  },[]);
 
   return (
     <div>
@@ -119,7 +129,7 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {featuredProducts.map((product) => (
+            {data.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
