@@ -2,19 +2,18 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, Truck, Shield, Users } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { useEffect, useState } from 'react';
-import { AppStore } from '../utils/store';
-import { products } from '../data/products';
+import { AppStore } from '../utils/Store';
 
 export default function Home() {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    setData(products);
-    // AppStore.getProducts().then(response => {
-    //   setData([]);
-    // }).catch(() => {
-    //   setData([]);
-    // });
+    AppStore.getProducts().then(result => {
+      console.log(result);
+      setData(result);
+    }).catch(() => {
+      setData([]);
+    });
   },[]);
 
   return (

@@ -1,13 +1,21 @@
+export enum Category {
+  AllProducts = 0,
+  Vegetables = 1,
+  Fruits = 2,
+  Dairy = 3,
+  Honey = 4,
+  Grains = 5,
+}
+
 export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  unit: string;
+  id: number;
+  title: string;
   description: string;
-  image: string;
-  category: string;
-  availability: 'In Stock' | 'Low Stock' | 'Out of Stock';
-  featured?: boolean;
+  image: Uint8Array | null; // or string if base64 or URL
+  price: number;
+  category: Category;
+  unit: string;
+  stock: number;
 }
 
 export interface CartItem {

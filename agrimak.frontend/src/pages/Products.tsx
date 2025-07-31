@@ -1,47 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Search, Filter } from 'lucide-react';
-import { products, categories } from '../data/products';
-import ProductCard from '../components/ProductCard';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Search, Filter } from "lucide-react";
+import ProductCard from "../components/ProductCard";
+import { Category, Product } from "../types";
+import { AppStore } from "../utils/Store";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All Products');
-  const [sortBy, setSortBy] = useState('name');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
+  const [sortBy, setSortBy] = useState("name");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [cateogries, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    const category = searchParams.get('category');
-    if (category && categories.includes(category)) {
-      setSelectedCategory(category);
-    }
-  }, [searchParams]);
-
-  const filteredProducts = products
-    .filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'All Products' || product.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case 'price-low':
-          return a.price - b.price;
-        case 'price-high':
-          return b.price - a.price;
-        case 'name':
-        default:
-          return a.name.localeCompare(b.name);
-      }
+    AppStore.getProductsByType(Category.AllProducts).then((result) => {
+      setProducts(result);
     });
+
+    const tmp: { key: string; value: number }[] = Object.entries(Category).map(
+      ([key, value]) => ({ key, value: Number(value) })
+    );
+    setCategories(tmp);
+  }, [searchParams]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    if (category === 'All Products') {
-      searchParams.delete('category');
+    if (category === "All Products") {
+      searchParams.delete("category");
     } else {
-      searchParams.set('category', category);
+      searchParams.set("category", category);
     }
     setSearchParams(searchParams);
   };
@@ -51,10 +39,12 @@ export default function Products() {
       {/* Header */}
       <section className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Our Products</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            Our Products
+          </h1>
           <p className="text-lg text-gray-600 max-w-2xl">
-            Fresh, organic, and locally-sourced agricultural products delivered straight 
-            from our trusted farming partners to your table.
+            Fresh, organic, and locally-sourced agricultural products delivered
+            straight from our trusted farming partners to your table.
           </p>
         </div>
       </section>
@@ -84,7 +74,7 @@ export default function Products() {
                   onChange={(e) => handleCategoryChange(e.target.value)}
                   className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-emerald-500"
                 >
-                  {categories.map((category) => (
+                  {cateogries.map((category) => (
                     <option key={category} value={category}>
                       {category}
                     </option>
@@ -111,14 +101,14 @@ export default function Products() {
       <section className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-1 overflow-x-auto py-4">
-            {categories.map((category) => (
+            {cateogries.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
                 className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === category
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? "bg-emerald-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 {category}
@@ -131,17 +121,19 @@ export default function Products() {
       {/* Products Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredProducts.length > 0 ? (
+          {products.length > 0 ? (
             <>
               <div className="flex justify-between items-center mb-6">
                 <p className="text-gray-600">
-                  Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-                  {selectedCategory !== 'All Products' && ` in ${selectedCategory}`}
+                  Showing {products.length} product
+                  {products.length !== 1 ? "s" : ""}
+                  {selectedCategory !== "All Products" &&
+                    ` in ${selectedCategory}`}
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredProducts.map((product) => (
+                {products.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
@@ -153,8 +145,8 @@ export default function Products() {
               </p>
               <button
                 onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('All Products');
+                  setSearchTerm("");
+                  setSelectedCategory("All Products");
                 }}
                 className="mt-4 text-emerald-600 hover:text-emerald-700 font-medium"
               >

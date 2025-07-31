@@ -1,10 +1,10 @@
 import axios from "axios";
-import { User } from "../data/user";
+import { User } from "../types/user";
 
 export class HttpHelpers {
   static axiosInstance = axios.create({
-    baseURL: "",
-    withCredentials: true,
+    baseURL: "https://localhost:44353/",
+    withCredentials: false,
   });
 
   static post(relativeURL: string, model: any): Promise<any> {

@@ -1,13 +1,12 @@
-﻿namespace agrimak.domain
+﻿namespace agrimak.API.DTOs
 {
-    public class Product
+    public class CreateProductDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public byte[] Image { get; set; }
         public double Price { get; set; }
-        public Category Category { get; set; }
+        public int Category { get; set; } // Enum as int
         public string Unit { get; set; }
         public int Stock { get; set; }
     }
