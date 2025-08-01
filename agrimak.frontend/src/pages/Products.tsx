@@ -18,9 +18,9 @@ export default function Products() {
       setProducts(result);
     });
 
-    const tmp: { key: string; value: number }[] = Object.entries(Category).map(
-      ([key, value]) => ({ key, value: Number(value) })
-    );
+     const tmp: { key: string; value: number }[] = Object.entries(Category)
+      .filter(([key, value]) => isNaN(Number(key))) // remove numeric keys
+      .map(([key, value]) => ({ key, value: Number(value) }));
     setCategories(tmp);
   }, [searchParams]);
 
@@ -75,8 +75,8 @@ export default function Products() {
                   className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-emerald-500"
                 >
                   {cateogries.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
+                    <option key={category.key} value={category.value}>
+                      {category.key}
                     </option>
                   ))}
                 </select>
@@ -103,15 +103,15 @@ export default function Products() {
           <div className="flex space-x-1 overflow-x-auto py-4">
             {cateogries.map((category) => (
               <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
+                key={category.key}
+                onClick={() => handleCategoryChange(category.key)}
                 className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === category
                     ? "bg-emerald-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                {category}
+                {category.key}
               </button>
             ))}
           </div>

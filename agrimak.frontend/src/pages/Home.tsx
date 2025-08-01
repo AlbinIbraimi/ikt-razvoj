@@ -9,9 +9,9 @@ export default function Home() {
 
   useEffect(() => {
     AppStore.getProducts().then(result => {
-      console.log(result);
       setData(result);
-    }).catch(() => {
+    }).catch((error) => {
+      console.error(error);
       setData([]);
     });
   },[]);

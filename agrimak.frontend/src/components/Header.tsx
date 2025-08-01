@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, Leaf } from "lucide-react";
+import { ShoppingCart, Menu, X, ChevronDown, Leaf, LogIn } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { Category } from "../types";
+import LoginForm from "../pages/Login";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const { totalItems } = useCart();
   const location = useLocation();
-  const [cateogries, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
-    const tmp: { key: string; value: number }[] = Object.entries(Category).map(
-      ([key, value]) => ({ key, value: Number(value) })
-    );
+    const tmp: { key: string; value: number }[] = Object.entries(Category)
+      .filter(([key, value]) => isNaN(Number(key))) // remove numeric keys
+      .map(([key, value]) => ({ key, value: Number(value) }));
     setCategories(tmp);
   }, []);
 
@@ -63,13 +65,15 @@ export default function Header() {
                   >
                     All Products
                   </Link>
-                  {cateogries.slice(1).map((category) => (
+                  {categories.slice(1).map((category) => (
                     <Link
-                      key={category}
-                      to={`/products?category=${encodeURIComponent(category)}`}
+                      key={category.key}
+                      to={`/products?category=${encodeURIComponent(
+                        category.value
+                      )}`}
                       className="block px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
                     >
-                      {category}
+                      {category.key}
                     </Link>
                   ))}
                 </div>
@@ -90,7 +94,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Cart & Mobile Menu */}
+          {/* Cart & Mobile Menu & Login */}
           <div className="flex items-center space-x-4">
             <Link
               to="/cart"
@@ -114,6 +118,17 @@ export default function Header() {
               ) : (
                 <Menu className="h-6 w-6" />
               )}
+            </button>
+
+            {/* Login button*/}
+            <button
+              onClick={() => {
+                setShowLogin(true);
+              }}
+              className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+              title="Admin Login"
+            >
+              <LogIn className="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -154,6 +169,7 @@ export default function Header() {
           </div>
         )}
       </div>
+      {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
     </header>
   );
 }

@@ -11,7 +11,7 @@ export interface Product {
   id: number;
   title: string;
   description: string;
-  image: Uint8Array | null; // or string if base64 or URL
+  image: string; 
   price: number;
   category: Category;
   unit: string;
@@ -26,8 +26,8 @@ export interface CartItem {
 export interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: number) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;

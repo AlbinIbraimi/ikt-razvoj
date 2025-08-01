@@ -3,8 +3,8 @@ import { CartItem, Product, CartContextType } from '../types';
 
 type CartAction =
   | { type: 'ADD_TO_CART'; product: Product; quantity: number }
-  | { type: 'REMOVE_FROM_CART'; productId: string }
-  | { type: 'UPDATE_QUANTITY'; productId: string; quantity: number }
+  | { type: 'REMOVE_FROM_CART'; productId: number }
+  | { type: 'UPDATE_QUANTITY'; productId: number; quantity: number }
   | { type: 'CLEAR_CART' }
   | { type: 'LOAD_CART'; items: CartItem[] };
 
@@ -68,11 +68,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: 'ADD_TO_CART', product, quantity });
   };
 
-  const removeFromCart = (productId: string) => {
+  const removeFromCart = (productId: number) => {
     dispatch({ type: 'REMOVE_FROM_CART', productId });
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: number, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', productId, quantity });
   };
 
