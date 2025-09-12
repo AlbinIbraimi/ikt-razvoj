@@ -15,12 +15,14 @@ export class HttpHelpers {
   }
 
   static postFormData(relativeURL: string, formData: FormData): Promise<any> {
-    return this.axiosInstance.post(relativeURL, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    }).catch((error) => {
-      this.handleError(error);
-      throw error;
-    });
+    return this.axiosInstance
+      .post(relativeURL, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .catch((error) => {
+        this.handleError(error);
+        throw error;
+      });
   }
 
   static get(relativeUrl: string): Promise<any> {
@@ -39,22 +41,28 @@ export class HttpHelpers {
         !window.location.href.includes("login")
       ) {
         UserHelpers.resetLogedInUser();
-        window.location.href = "login";
+        window.location.href = "/";
       }
     }
   }
 }
 
 export class UserHelpers {
-  static getLogedInUser(): User | undefined {
+  static setUser(user: User) {
+    if(!user)
+      return;
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  static getLogedInUser(): User | null {
     const localData = localStorage.getItem("user");
-    if (!localData || localData === "") return undefined;
+    if (!localData || localData === "") return null;
 
     const model = JSON.parse(localData);
     return new User(model);
   }
 
   static resetLogedInUser(): void {
-    localStorage.setItem("user", "");
+    localStorage.removeItem("user");
   }
 }

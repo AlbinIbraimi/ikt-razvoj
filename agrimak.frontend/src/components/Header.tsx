@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, ChevronDown, Leaf, LogIn } from "lucide-react";
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  ChevronDown,
+  Leaf,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { Category } from "../types";
 import LoginForm from "../pages/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../utils/reduxstore";
+import { logout } from "../utils/authSlice";
+import { AppStore } from "../utils/store";
 
 export default function Header() {
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.auth.user);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const { totalItems } = useCart();
@@ -19,6 +34,16 @@ export default function Header() {
       .map(([key, value]) => ({ key, value: Number(value) }));
     setCategories(tmp);
   }, []);
+
+  const logoutAsync = async () => {
+    try {
+      await AppStore.logout().then(() => {
+        dispatch(logout())
+      });
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
 
   const isActive = (path: string) => {
     return location.pathname === path
@@ -96,6 +121,13 @@ export default function Header() {
 
           {/* Cart & Mobile Menu & Login */}
           <div className="flex items-center space-x-4">
+            {user ? <p>{user.email}</p> : ""}
+            {user && (<Link
+              to="/adminpanel"
+              className={`transition-colors ${isActive("/about")}`}
+            >
+              Admin panel
+            </Link>)}
             <Link
               to="/cart"
               className="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors"
@@ -120,16 +152,23 @@ export default function Header() {
               )}
             </button>
 
-            {/* Login button*/}
-            <button
-              onClick={() => {
-                setShowLogin(true);
-              }}
-              className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
-              title="Admin Login"
-            >
-              <LogIn className="h-6 w-6" />
-            </button>
+            {user ? (
+              <button
+                onClick={logoutAsync} // call your logout function here
+                className="p-2 text-red-600 hover:text-red-800 transition-colors"
+                title="Logout"
+              >
+                <LogOut className="h-6 w-6" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setShowLogin(true)}
+                className="p-2 text-gray-700 hover:text-emerald-600 transition-colors"
+                title="Admin Login"
+              >
+                <LogIn className="h-6 w-6" />
+              </button>
+            )}
           </div>
         </div>
 

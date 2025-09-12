@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { AppStore } from "../utils/Store";
+import { AppStore } from "../utils/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../utils/reduxstore";
+import { loginSuccess } from "../utils/authSlice";
 
 interface Props {
   onClose: () => void;
 }
 
 export default function LoginForm({ onClose }: Props) {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,6 +19,7 @@ export default function LoginForm({ onClose }: Props) {
     AppStore.login(username, password)
       .then((result) => {
         console.log("Loged in");
+        dispatch(loginSuccess(result))
         onClose();
       })
       .catch((error) => {

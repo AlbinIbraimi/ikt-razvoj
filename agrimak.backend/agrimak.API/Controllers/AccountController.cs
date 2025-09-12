@@ -107,7 +107,6 @@ namespace agrimak.API.Controllers
             return new JsonResult(users);
         }
 
-        [Authorize]
         [HttpGet]
         [Route("logout")]
         public async Task<ActionResult> LogoutUser()
