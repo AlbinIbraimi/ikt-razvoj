@@ -1,5 +1,5 @@
 import { ShoppingCart, Star } from "lucide-react";
-import { Product } from "../types";
+import { Category, Product } from "../types";
 import { useCart } from "../context/CartContext";
 
 interface ProductCardProps {
@@ -47,7 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.title}
           </h3>
           <span className="text-sm text-gray-500 font-medium bg-gray-100 px-2 py-1 rounded">
-            {product.category}
+            {Category[product.category]}
           </span>
         </div>
 

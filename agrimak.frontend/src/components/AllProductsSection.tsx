@@ -1,6 +1,6 @@
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Product } from "../types";
+import { Category, Product } from "../types";
 import { AppStore } from "../utils/store";
 
 export default function AllProductsSection() {
@@ -14,7 +14,7 @@ export default function AllProductsSection() {
         setProducts(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Failed to load products");
         setLoading(false);
       });
@@ -58,7 +58,7 @@ export default function AllProductsSection() {
                   <TableCell>{product.title}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
-                  <TableCell>{product.category}</TableCell>
+                  <TableCell>{Category[product.category]}</TableCell>
                   <TableCell>{product.unit}</TableCell>
                   <TableCell>{product.stock}</TableCell>
                   <TableCell>
