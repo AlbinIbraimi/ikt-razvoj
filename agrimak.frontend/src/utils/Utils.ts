@@ -4,7 +4,7 @@ import { User } from "../types/user";
 export class HttpHelpers {
   static axiosInstance = axios.create({
     baseURL: "https://localhost:44353/",
-    withCredentials: false,
+    withCredentials: true,
   });
 
   static post(relativeURL: string, model: any): Promise<any> {

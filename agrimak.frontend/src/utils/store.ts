@@ -57,11 +57,7 @@ export class AppStore {
     );
   }
 
-  static createProduct(model: Product): Promise<any> {
+  static createProduct(model: any): Promise<any> {
     return HttpHelpers.post("home/create", model);
   }
-}
-
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
 }
