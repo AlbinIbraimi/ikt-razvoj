@@ -62,6 +62,22 @@ namespace agrimak.API.Controllers
             return new JsonResult(product.Id);
         }
 
+        //[Authorize]
+        [HttpPost]
+        [Route("delete")]
+        public async Task<JsonResult> Delete([FromBody] DeleteProductDto dto)
+        {
+            var product = await _context.Products.FindAsync(dto.ProductId);
+
+            if (product == null)
+                throw new Exception($"Product with id {dto.ProductId} not found.");
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return new JsonResult("");
+        }
+
         [HttpGet]
         [Route("getById")]
         public async Task<ActionResult<Product>> GetProductById(int id)

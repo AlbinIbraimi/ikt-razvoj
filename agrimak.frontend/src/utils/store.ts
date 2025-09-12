@@ -3,7 +3,6 @@ import { User } from "../types/user";
 import { HttpHelpers, UserHelpers } from "./Utils";
 
 export class AppStore {
-
   // Users
   static login(email: string, passowrd: string): Promise<User> {
     return HttpHelpers.post("account/login", {
@@ -55,6 +54,10 @@ export class AppStore {
         return products;
       }
     );
+  }
+
+  static deleteProduct(id: number): Promise<any> {
+    return HttpHelpers.post("home/delete", { productId: id });
   }
 
   static createProduct(model: any): Promise<any> {
