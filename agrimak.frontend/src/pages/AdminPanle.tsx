@@ -11,10 +11,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Product, Category } from "../types";
+import { Height } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
 export default function AdminPanel() {
+  const [selectedView, setSelectedView] = useState<"create" | "list">("create");
+
   const [product, setProduct] = useState<Product>({
     id: 0,
     title: "",
@@ -40,26 +43,36 @@ export default function AdminPanel() {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100%" }}>
+    <Box sx={{ display: "flex", flex: 1, minHeight: 0 }}>
       {/* Sidebar */}
       <Drawer
         variant="permanent"
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          position: "relative", // << important
           [`& .MuiDrawer-paper`]: {
-            position: "relative", // << keep it inside flexbox
             width: drawerWidth,
             boxSizing: "border-box",
-            height: "100%", // fills only the parent flexbox, not full window
+            position: "relative",
+            backgroundColor: "#f5f5f5", // gray background
           },
         }}
       >
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedView === "create"}
+              onClick={() => setSelectedView("create")}
+            >
               <ListItemText primary="Create Product" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={selectedView === "list"}
+              onClick={() => setSelectedView("list")}
+            >
+              <ListItemText primary="All Products" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -67,47 +80,91 @@ export default function AdminPanel() {
 
       {/* Content */}
       <Box component="main" sx={{ flexGrow: 1, p: 3, overflowY: "auto" }}>
-        <Typography variant="h5" gutterBottom>
-          Create Product
-        </Typography>
+        {selectedView === "create" && (
+          <>
+            <Typography variant="h5" gutterBottom>
+              Create Product
+            </Typography>
 
-        <Box
-          component="form"
-          sx={{ display: "grid", gap: 2, maxWidth: 500 }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField label="Title" name="title" value={product.title} onChange={handleChange} />
-          <TextField
-            label="Description"
-            name="description"
-            value={product.description}
-            onChange={handleChange}
-            multiline
-            rows={3}
-          />
-          <TextField label="Image URL" name="image" value={product.image} onChange={handleChange} />
-          <TextField
-            label="Price"
-            name="price"
-            type="number"
-            value={product.price}
-            onChange={handleChange}
-          />
-          <TextField label="Category" name="category" value={product.category} onChange={handleChange} />
-          <TextField label="Unit" name="unit" value={product.unit} onChange={handleChange} />
-          <TextField
-            label="Stock"
-            name="stock"
-            type="number"
-            value={product.stock}
-            onChange={handleChange}
-          />
+            <Box
+              component="form"
+              sx={{ display: "grid", gap: 2, maxWidth: 500 }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                label="Title"
+                name="title"
+                value={product.title}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Description"
+                name="description"
+                value={product.description}
+                onChange={handleChange}
+                multiline
+                rows={3}
+              />
+              <TextField
+                label="Image URL"
+                name="image"
+                value={product.image}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Price"
+                name="price"
+                type="number"
+                value={product.price}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Category"
+                name="category"
+                value={product.category}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Unit"
+                name="unit"
+                value={product.unit}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Stock"
+                name="stock"
+                type="number"
+                value={product.stock}
+                onChange={handleChange}
+              />
 
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Create
-          </Button>
-        </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                Create
+              </Button>
+            </Box>
+          </>
+        )}
+
+        {selectedView === "list" && (
+          <>
+            <Typography variant="h5" gutterBottom>
+              All Products
+            </Typography>
+            <Box>
+              {/* Dummy product list for now */}
+              <ul>
+                <li>Apples - $2.00</li>
+                <li>Bananas - $1.50</li>
+                <li>Tomatoes - $3.20</li>
+              </ul>
+            </Box>
+          </>
+        )}
       </Box>
     </Box>
   );
