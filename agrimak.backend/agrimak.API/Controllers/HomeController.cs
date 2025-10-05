@@ -30,11 +30,18 @@ namespace agrimak.API.Controllers
         [Route("getByCategory")]
         public async Task<JsonResult> GetByType(Category category)
         {
-            var products = await _context.Products
-                .Where(x => x.Category == category)
-                .ToListAsync();
-
-            return new JsonResult(products);
+            if (category == Category.AllProducts)
+            {
+                var products = await _context.Products.ToListAsync();
+                return new JsonResult(products);
+            }
+            else 
+            {
+                var products = await _context.Products
+                    .Where(x => x.Category == category)
+                    .ToListAsync();
+                return new JsonResult(products);
+            }
         }
 
         [Authorize]

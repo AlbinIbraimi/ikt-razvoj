@@ -30,7 +30,7 @@ export default function Header() {
 
   useEffect(() => {
     const tmp: { key: string; value: number }[] = Object.entries(Category)
-      .filter(([key, value]) => isNaN(Number(key))) // remove numeric keys
+      .filter(([key]) => isNaN(Number(key))) // remove numeric keys
       .map(([key, value]) => ({ key, value: Number(value) }));
     setCategories(tmp);
   }, []);
@@ -70,8 +70,7 @@ export default function Header() {
             {/* Products Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsProductsDropdownOpen(true)}
-              onMouseLeave={() => setIsProductsDropdownOpen(false)}
+              onClick={() => setIsProductsDropdownOpen(! isProductsDropdownOpen)}
             >
               <button
                 className={`flex items-center space-x-1 transition-colors ${isActive(

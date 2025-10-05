@@ -1,36 +1,33 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, Filter } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import { Category, Product } from "../types";
-import { AppStore } from "../utils/Store";
+import { AppStore } from "../utils/store";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All Products");
-  const [sortBy, setSortBy] = useState("name");
+  const [selectedCategory, setSelectedCategory] = useState<Category>(Category.AllProducts);
   const [products, setProducts] = useState<Product[]>([]);
   const [cateogries, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    AppStore.getProductsByType(Category.AllProducts).then((result) => {
+    AppStore.getProductsByType(selectedCategory).then((result) => {
       setProducts(result);
     });
 
      const tmp: { key: string; value: number }[] = Object.entries(Category)
-      .filter(([key, value]) => isNaN(Number(key))) // remove numeric keys
+      .filter(([key]) => isNaN(Number(key))) // remove numeric keys
       .map(([key, value]) => ({ key, value: Number(value) }));
     setCategories(tmp);
-  }, [searchParams]);
+  }, [selectedCategory]);
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: Category) => {
     setSelectedCategory(category);
-    if (category === "All Products") {
-      searchParams.delete("category");
-    } else {
-      searchParams.set("category", category);
-    }
+    // if (category === "All Products") {
+    //   searchParams.delete("category");
+    // } else {
+    //   searchParams.set("category", category);
+    // }
     setSearchParams(searchParams);
   };
 
@@ -49,54 +46,6 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500"
-              />
-            </div>
-
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              {/* Category Filter */}
-              <div className="flex items-center space-x-2">
-                <Filter className="h-5 w-5 text-gray-400" />
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => handleCategoryChange(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-emerald-500"
-                >
-                  {cateogries.map((category) => (
-                    <option key={category.key} value={category.value}>
-                      {category.key}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Sort */}
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-emerald-500"
-              >
-                <option value="name">Sort by Name</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Category Tabs */}
       <section className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,7 +53,7 @@ export default function Products() {
             {cateogries.map((category) => (
               <button
                 key={category.key}
-                onClick={() => handleCategoryChange(category.key)}
+                onClick={() => handleCategoryChange(category.key as Category)}
                 className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === category
                     ? "bg-emerald-600 text-white"
@@ -127,7 +76,7 @@ export default function Products() {
                 <p className="text-gray-600">
                   Showing {products.length} product
                   {products.length !== 1 ? "s" : ""}
-                  {selectedCategory !== "All Products" &&
+                  {selectedCategory !== Category.AllProducts &&
                     ` in ${selectedCategory}`}
                 </p>
               </div>
@@ -145,8 +94,7 @@ export default function Products() {
               </p>
               <button
                 onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("All Products");
+                  setSelectedCategory(Category.AllProducts);
                 }}
                 className="mt-4 text-emerald-600 hover:text-emerald-700 font-medium"
               >
