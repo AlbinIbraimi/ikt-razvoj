@@ -34,23 +34,28 @@ export default function Chatbot() {
 
   const ProductSuggestions: React.FC<{ products: Product[] }> = ({ products }) => {
     return (
-      <div className="mt-2">
-        <div className="flex space-x-3 overflow-x-auto py-2">
-          {products.map((p) => (
+      <div className="mt-2 space-y-2">
+        {products.map((p) => (
+          <div
+            key={p.id}
+            className="bg-white border rounded-md shadow-sm hover:shadow-md transition-shadow p-2 flex items-center space-x-3"
+          >
             <Link
-              key={p.id}
               to={`/product/${p.id}`}
-              className="shrink-0 w-40 bg-white border rounded-md shadow-sm hover:shadow-md transition-shadow p-2 flex flex-col items-center text-center"
+              className="flex items-center space-x-3 w-full"
             >
               <img
                 src={p.image}
                 alt={p.title}
-                className="w-24 h-24 object-cover rounded mb-2"
+                className="w-16 h-16 object-cover rounded"
               />
-              <div className="text-sm font-medium text-gray-700 truncate">{p.title}</div>
+              <div className="flex-1">
+                <div className="text-sm font-medium text-gray-700 truncate">{p.title}</div>
+                <div className="text-xs text-gray-500">${p.price.toFixed(2)}</div>
+              </div>
             </Link>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     );
   };
