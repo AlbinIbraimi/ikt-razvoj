@@ -3,6 +3,14 @@ import { User } from "../types/user";
 import { HttpHelpers, UserHelpers } from "./Utils";
 
 export class AppStore {
+  //Chat
+  static sendSearch(query: string): Promise<Product[]> {
+    return HttpHelpers.post("home/search", { query: query })
+    .then(response => {
+      return response.data as Product[];
+    });
+  }
+
   // Users
   static login(email: string, passowrd: string): Promise<User> {
     return HttpHelpers.post("account/login", {

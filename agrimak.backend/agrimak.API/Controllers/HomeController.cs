@@ -35,7 +35,7 @@ namespace agrimak.API.Controllers
                 var products = await _context.Products.ToListAsync();
                 return new JsonResult(products);
             }
-            else 
+            else
             {
                 var products = await _context.Products
                     .Where(x => x.Category == category)
@@ -69,7 +69,7 @@ namespace agrimak.API.Controllers
             return new JsonResult(product.Id);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [Route("delete")]
         public async Task<JsonResult> Delete([FromBody] DeleteProductDto dto)
@@ -83,6 +83,17 @@ namespace agrimak.API.Controllers
             await _context.SaveChangesAsync();
 
             return new JsonResult("");
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public async Task<JsonResult> Search([FromBody] SearchDto search) 
+        {
+            var products = _context.Products
+                .Where(x => EF.Functions.ToTsVector("english", x.Title + " " + x.Description)
+                                        .Matches(EF.Functions.WebSearchToTsQuery("english", search.Query))).ToList();
+
+            return new JsonResult(products);
         }
 
         [HttpGet]
