@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminPanel from './pages/AdminPanle';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/adminpanel" element={<AdminPanel />} />
+              <Route path="/product/:id" element={<ProductDetailsPage />} />
             </Routes>
           </main>
           <Footer />
